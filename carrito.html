@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmiahorro - Comprar</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .cart h2 {
+            margin-top: 0;
+        }
+        .cart-items {
+            list-style-type: none;
+            padding: 0;
+        }
+        .cart-items li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .cart-items li span {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cart">
+        <h2>Carrito de Compras</h2>
+        <ul class="cart-items"></ul>
+        <p>Total: $<span class="cart-total">0</span></p>
+        <button onclick="checkout()">Finalizar Compra</button>
+    </div>
+
+    <section class="health_section layout_padding">
+        <div class="dropdown-container">
+            <a href="dolor.html">Tratamiento del dolor</a>
+            <a href="gripa.html">Cuidado gripal</a>
+            <a href="suplementos.html">Suplementos</a>
+            <a href="belleza.html">Belleza</a>
+            <a href="cuidado_personal.html">Cuidado Personal</a>
+            <a href="cuidado_bebe.html">Cuidado del Bebé</a>
+            <a href="dermocosmetica.html">Dermocosmética</a>
+            <a href="alimentos_bebidas.html">Alimentos y bebidas</a>
+            <a href="mascotas.html">Mascotas y otros</a>
+            <a href="carrito.html">Carrito de compras</a>
+        </div>
+
+        <div class="carousel-wrap layout_padding2">
+            <div class="owl-carousel">
+                <div class="item">
+                    <div class="box">
+                        <div class="btn_container">
+                            <button onclick="addToCart('Producto 1', 25000)">Agregar al Carrito</button>
+                        </div>
+                        <div class="img-box">
+                            <img src="images/producto1.png" alt="Producto 1">
+                        </div>
+                    </div>
+                </div>
+                <!-- Agrega más productos aquí -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let cart = [];
+
+        function addToCart(product, price) {
+            cart.push({ product, price });
+            renderCart();
+        }
+
+        function renderCart() {
+            const cartItems = document.querySelector('.cart-items');
+            const cartTotal = document.querySelector('.cart-total');
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span>${item.product}</span> <span>$${item.price}</span>`;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+            cartTotal.textContent = total;
+        }
+
+        function checkout() {
+            alert('Compra finalizada. Total: $' + document.querySelector('.cart-total').textContent);
+            cart = [];
+            renderCart();
+        }
+    </script>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+</body>
+</html>
